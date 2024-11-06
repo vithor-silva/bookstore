@@ -17,5 +17,23 @@ namespace Bookstore.Controllers
         {
             return View(_context.Genres.ToList());
         }
+
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Create(Genre genre)
+        {
+            if(!ModelState.IsValid)
+            {
+                return View();
+            }
+
+
+            return RedirectToAction(nameof(Index));
+        }
     }
 }
