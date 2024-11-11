@@ -1,4 +1,5 @@
 using Bookstore.Data;
+using Bookstore.Services;
 using Microsoft.EntityFrameworkCore;
 
 namespace Bookstore
@@ -27,6 +28,8 @@ namespace Bookstore
                         )
                 );
             });
+
+            builder.Services.AddScoped<GenreService>();
 
 
             var app = builder.Build();
