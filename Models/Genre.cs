@@ -8,7 +8,7 @@ namespace Bookstore.Models
 
         [Display(Name = "Nome")]
         public string Name { get; set; }
-        // public ICollection<Book> BooKs { get; set; } = new List<Book>();
+        public ICollection<Book> BooKs { get; set; } = new List<Book>();
 
         public Genre()
         {
