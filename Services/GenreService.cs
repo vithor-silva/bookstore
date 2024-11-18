@@ -43,5 +43,27 @@ namespace Bookstore.Services
                 throw new IntegrityException(ex.Message);
             }
         }
+
+        public async Task UpdateAsync(Genre genre)
+        {
+            bool hasAny = await _context.Genres.AnyAsync(x => x.Id == genre.Id);
+
+            if(!hasAny)
+            {
+                throw new NotFoundException("Id não encontrado");
+            }
+
+            try
+            {
+                _context.Update(genre);
+                await _context.SaveChangesAsync();
+            }
+
+            catch (DbUpdateConcurrencyException ex)
+            {
+                throw new DbConcurrencyException(ex.Message);
+            }
+        }
     }
+
 }
