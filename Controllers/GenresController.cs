@@ -125,7 +125,7 @@ namespace Bookstore.Controllers
             {
                 return RedirectToAction(nameof(Error), new { message = "Id não fornecido" });
             }
-            var obj = await _service.FindByIdEager(id.Value);
+            var obj = await _service.FindByIdEagerAsync(id.Value);
             if (obj is null)
             {
                 return RedirectToAction(nameof(Error), new { message = "Id não encontrado" });
