@@ -11,7 +11,6 @@ using Bookstore.Services;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 using Bookstore.Models.ViewModels;
 using System.Diagnostics;
-using Bookstore.Services.Exceptions;
 using Bookstore.Services.Exception;
 
 namespace Bookstore.Controllers
@@ -74,14 +73,15 @@ namespace Bookstore.Controllers
         {
             if (id is null)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error), new { message = "Id não fornecido" });
             }
 
-            var book = await _context.Books.FindAsync(id);
-            if (book == null)
+            var book = await _service.FindByIdAsync(id.Value);
+            if (book is null)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error), new { message = "Id não encontrado" });
             }
+
             return View(book);
         }
 
@@ -114,16 +114,15 @@ namespace Bookstore.Controllers
         // GET: Books/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null)
+            if (id is null)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error), new { message = "Id não fornecido" });
             }
 
-            var book = await _context.Books
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (book == null)
+            var book = await _service.FindByIdAsync(id.Value);
+            if (book is null)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error), new { message = "Id não encontrado" });
             }
 
             return View(book);
