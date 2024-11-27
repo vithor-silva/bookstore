@@ -30,7 +30,7 @@ namespace Bookstore.Services
             return await _context.Genres.FirstOrDefaultAsync(x => x.Id == id);
         }
 
-        public async Task<Genre> FindByIdEager(int id)
+        public async Task<Genre> FindByIdEagerAsync(int id)
         {
             return await _context.Genres.Include(x => x.Books).FirstOrDefaultAsync(x => x.Id == id);
         }

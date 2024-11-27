@@ -14,10 +14,6 @@ namespace Bookstore
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
-            builder.Services.AddScoped<GenreService>();
-
-            builder.Services.AddScoped<SeedingService>();
-
 
             builder.Services.AddDbContext<BookstoreContext>(options =>
             {
@@ -35,6 +31,8 @@ namespace Bookstore
             });
 
             builder.Services.AddScoped<GenreService>();
+            builder.Services.AddScoped<BookService>();
+            builder.Services.AddScoped<SeedingService>();
 
 
             var app = builder.Build();
